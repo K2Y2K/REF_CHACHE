@@ -1,0 +1,132 @@
+一、安装tomcat连接mysql的jar包
+http://blog.csdn.net/qq_16912257/article/details/51440942;mysql连接jar包。
+
+ sudo cp -r mysql-connector-java-5.1.21-bin.jar /usr/lib/tomcat/apache-tomcat-8.0.47/lib;为tomcat导入了mysql的连接jar包。
+
+二、CISCOVPN　翻墙软件
+       由于VPN客户端和Ubuntu系统兼容性的问题，昨天文豪分享的客户端安装的方法只能在Ubuntu14.04上
+
+正常使用，今天发现系统为16.04 和12.04的同事使用时连接后无法翻墙，现在已经找到了兼容的软件，安装步骤如下：
+
+1. 拷贝anyconnect-Linux_64-2.5.2019-k9.tar.gz压缩包到本地（目前放在31 bal的跟文件夹下，请有需要测试GTS的同事及时拷贝）
+
+2. 在anyconnect-Linux_64-2.5.2019-k9.tar.gz所在文件夹打开终端
+
+3. tar xvzf anyconnect-Linux_64-2.5.2019-k9.tar.gz && cd ciscovpn && sudo ./vpn_install.sh
+
+4.在Dash中输入 Cisco 搜索就可以看到该软件已安装，打开输入VPN账号信息即可，大概10秒左右能连上，请在浏览器中输入Google网址查看是否可以打开来验证。
+
+注：该软件的运行需要有Java运行时等Java环境的支持，开发这边电脑都是安装了JDK的可以直接安装，测试部的电脑如没有安装请先安装JDK后再行安装。
+
+后续使用工程中如出现问题请及时与我联系。
+
+
+
+
+vpn host : 45.77.121.203:443
+
+Username: zjj15
+
+Password: Abc123456
+
+三、安装sublimeb text |node.js
+
+
+Ubuntu 上安装 Node.js 
+方法一：（比较慢）
+(http://www.runoob.com/nodejs/nodejs-install-setup.html)
+在 Github 上获取 Node.js 源码：
+
+$ sudo git clone https://github.com/nodejs/node.git
+Cloning into 'node'...【执行到该步骤】
+
+ 修改目录权限：
+
+$ sudo chmod -R 755 node
+
+使用 ./configure 创建编译文件，并按照：
+
+$ cd node
+$ sudo ./configure
+$ sudo make
+$ sudo make install
+
+查看 node 版本：
+ 
+$ node --version
+v10.0.0-pre
+
+方法二：Ubuntu apt-get命令安装：
+
+sudo apt-get install nodejs
+sudo apt-get install npm
+
+
+安装sublime（没懂　没成功）：
+git clone git://github.com/ternjs/tern_for_sublime.git
+Next, make sure node.js and npm are installed (Tern is a JavaScript program), and install the depedencies of the package.
+cd tern_for_sublime
+npm install
+安装sublime　方法一：
+
+Sublime-Text-3:（未成功 访问路径失败）
+
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+【
+首先下载Sublime Text 3存储库的安全密钥。这将确保从回购站下载的软件包经过身份验证等：
+
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+
+下一步。 将Sublime Text稳定库添加到您的软件源中：
+
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+
+如果你想运行Sublime Text的最新开发版本，你可以：只需运行这个命令，而不是上面的命令：
+
+echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+】
+sudo apt-get update
+sudo apt-get install sublime-text-installer
+
+方法二.通过Terminal（成功）:
+
+先下载:
+
+32-bit:
+
+wget http://c758482.r82.cf2.rackcdn.com/Sublime\ Text\ 2.0.2.tar.bz2
+tar vxjf Sublime\ Text\ 2.0.2.tar.bz2
+
+64-bit:
+
+wget http://c758482.r82.cf2.rackcdn.com/Sublime\ Text\ 2.0.2\ x64.tar.bz2
+tar vxjf Sublime\ Text\ 2.0.2\ x64.tar.bz2
+
+sub再安装:
+sudo mv Sublime\ Text\ 2  sublime
+sudo mv sublime  /opt/
+sudo ln -s /opt/sublime/sublime_text /usr/bin/subl　　／／配置快捷键为subl（自定义）
+
+注册码：
+ublime Text2 升级到 2.0.2 build 2221 64位 的破破解
+输入注册码就成了
+
+—– BEGIN LICENSE —–
+Andrew Weber
+Single User License
+EA7E-855605
+813A03DD 5E4AD9E6 6C0EEB94 BC99798F
+942194A6 02396E98 E62C9979 4BB979FE
+91424C9D A45400BF F6747D88 2FB88078
+90F5CC94 1CDC92DC 8457107A F151657B
+1D22E383 A997F016 42397640 33F41CFC
+E1D0AE85 A0BBD039 0E9C8D55 E1B89D5D
+5CDB7036 E56DE1C0 EFCC0840 650CD3A6
+B98FC99C 8FAC73EE D2B95564 DF450523
+—— END LICENSE —— 
+破解成功
+
+
+
+
+

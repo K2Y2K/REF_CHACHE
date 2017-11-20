@@ -1,0 +1,20 @@
+http://192.168.3.81:8002/gitweb/
+http://192.168.3.76:8007/gitweb/
+http://192.168.3.75:8006/redmine/
+https://sso.mediatek.com/eai/Login.aspx
+http://eservice.mediatek.com/eservice-portal/login
+http://192.168.3.77:8989/wcp/webtype/view/Pub1.html
+
+服务器：
+登陆用户名：gsm/63994
+密码：smn123456
+smb://192.168.3.127
+//192.168.0.31/bal
+
+文档密码：
+由于MTK的文档有保密需要，会定期更改密码，所以我们在不同时间从网站下载的文档密码也不一致：
+PDF File open password:
+1498169196(第一个密码)
+3692842215(若第一个密码失效,可以试一试这个)
+部分旧的文档，需要使用密码：
+1977051217 或者 2894058698

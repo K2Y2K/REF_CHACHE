@@ -1,0 +1,81 @@
+一、Ｌ平台：CTS:
+lidongxue@lidongxue-ThinkStation-P310:~/Project/tools/L CTS工具/android-cts/tool
+s$ ./cts-tradefed 
+lidongxue@lidongxue-ThinkStation-P310:~/Project/tools/L CTS工具/android-cts/tool
+s$ sudo update-alternatives --config java
+
+//拷贝ｍｅｄｉａ文件到手机
+  adb push android-cts-media-1.3/ /storage/sdcard0/test
+//创建plan　跑plan
+cts-tf > add derivedplan --plan cts_media -s 0 -r fail
+cts-tf > run cts --plan cts_media
+
+
+//往手机里拷贝media文件时　报错项
+failed to copy 'android-cts-media-1.3/.#copy_images.sh' to '/storage/sdcard0/test/.#copy_images.sh': Permission denied
+lidongxue@lidongxue-ThinkStation-P310:~/Project/tools/资料/cts_media$ 
+
+二、gts测试
+１，给adb建立软连接:
+2\修改jdk版本为1.8
+3.电脑翻墙，手机翻墙；
+
+
+install aapt  //无法动态链接???
+sudo apt-get install lib32stdc++6
+sudo apt-get install lib32z1 lib32z1-dev
+
+adb version < 1.0.36
+
+adb
+
+ctrl+alt+t
+
+home/adb/
+
+
+在aapt路径下打开终端
+sudo ln -s ~/aapt的文件路径 /usr/bin/adb   
+(aapt的文件路径：在SDK下找到aapt文件，copy文件在可控制台粘贴就有文件路径了，去掉前边的fill用户名，home等头目录)
+例如：sudo ln -s ~/Android/Sdk/build-tools/23.0.3/aapt /usr/bin/aapt
+
+给adb建立软链接
+sudo ln -s ~/Android/Sdk/build-tools/23.0.3/aapt /usr/bin/aapt
+
+usr/bin/
+sudo rm adb
+
+三、push　代码　and pull 代码：
+对编译完的代码　先进行清除操作；
+／／查看当前分支的状态（查看详细修改情况）
+git status （ git diff）
+／／添加到本地仓库
+git add .
+git status 
+／／提交到远程服务器
+git commit -m "Redmine 109495 gaoyaning modify for the GTS 2017-11-09 Checker:gaoyaning"
+
+git push origin 分支名；
+
+下载编译代码：
+git clone git@192.168.3.81:ALPS-MP-N0.MP2-V1_SR6580_WE_N.git
+git branch -a //查看所有分支
+git checkout 分支名
+./mk lp     //所有产品
+./mk -u  产品名 new    //编译user版本时需加-u
+编译好之后  项目名/sagereal/mk/产品名/ProjectConfig.mk文件中搜索widevine 
+若SAGEREAL_WIDEVINE_SUPPORT = yes 需编译：./mk -u  产品名 sign-image 
+
+
+（git pull更新代码）
+（git pull && ./产品名 new 更新并编译）
+（./clean_project_sagereal.sh 清除编译的项目）
+（/result$ grep "test_bind_IPV6" ./ -ir  在结果中搜索某一项的测试的结果）
+
+//拉以前版本的代码
+git reset --hard commitID
+
+
+//模块编译
+./mk 产品名　mm 包名/xx.apk;adb remote;adb push ./out/target/XXx/xx/xx.apk system/xx/xx.apk
+

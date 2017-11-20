@@ -1,0 +1,31 @@
+git clone git@192.168.3.81:ALPS-MP-N0.MP2-V1_SR6580_WE_N.git
+git branch -a //查看所有分支
+git checkout 分支名
+./mk lp     //所有产品
+./mk -u  产品名 new    //编译user版本时需加-u
+编译好之后  项目名/sagereal/mk/产品名/ProjectConfig.mk文件中搜索widevine 
+若SAGEREAL_WIDEVINE_SUPPORT = yes 需编译：./mk -u  产品名 sign-image 
+
+
+
+
+（git pull更新代码）
+（git pull && ./产品名 new 更新并编译）
+（./clean_project_sagereal.sh 清除编译的项目）
+（/result$ grep "test_bind_IPV6" ./ -ir  在结果中搜索某一项的测试的结果）
+
+//拉以前版本的代码
+git reset --hard commitID
+
+
+//push
+
+对编译完的代码　先进行清除操作；
+／／查看当前分支的状态（查看详细修改情况）
+git status （ git diff）
+／／添加到本地仓库
+git add .
+git status 
+／／提交到远程服务器
+git commit -m "Redmine 109495 gaoyaning modify for the GTS 2017-11-09 Checker:gaoyaning"
+git push origin 分支名

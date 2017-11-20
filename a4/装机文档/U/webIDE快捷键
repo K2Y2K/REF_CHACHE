@@ -1,0 +1,52 @@
+//关于weIDE开发　网址：https://developer.mozilla.org/en-US/；
+Web Console (Ctrl+Shift+K on Windows and Linux);
+To open Scratchpad (Shift+F4) or select "Scratchpad" from the "Developer" menu, which is under the menu in Firefox. ;
+(Shift+F8):打开Firefox WebIDE;
+
+https://coding.net/help/doc/webide/weapp.html;
+
+//下载jquery网址：http://jquery.com/download/#Download_jQuery；
+git clone git://github.com/jquery/jquery.git
+
+git checkout 1.2.6
+
+
+
+码云：https://gitee.com/；
+开源中国：http://www.oschina.net/；
+博客园：https://www.cnblogs.com/
+关于weIDE开发　网址：https://developer.mozilla.org/en-US/；	
+关于bootstrap网址：http://v3.bootcss.com/；
+http://www.runoob.com/bootstrap/bootstrap-tutorial.html；
+http://www.w3school.com.cn/jquerymobile/；
+
+https://coding.net/help/doc/webide/weapp.html
+在WebIDE中，提供了一个整合了开源的开源的 CodeMirror编辑器和 tern.js代码分析框架的代码编辑器，可以方便编辑HTML、JavaScript和CSS文件源码文件。 
+http://ternjs.net/
+http://codemirror.net/
+
+服务器:http://192.168.3.76:8007/gitweb/?p=ALPS-MP-M0.MP22-V1.15.4_SR6572_WE_M.git;a=shortlog;h=refs/heads/dev;
+eservice:
+http://eservice.mediatek.com/eservice-portal/login.aspx;
+
+https://sso.mediatek.com/eai/Login.aspx;
+
+http://192.168.3.75:8006/redmine/login.aspx;
+
+WCP:http://192.168.3.77:8989/wcp/websearch/PubDo.do?word=git;
+
+192.168.3.127
+192.168.0.31
+192.168.0.9
+172.16.87.202
+
+【
+开源中国        https://www.oschina.net/  可以正常访问 
+安卓巴士       http://www.apkbus.com/     可以正常访问 
+
+以下网址IP地址较多，并且每个链接地址IP都不一样。 
+
+  菜鸟教程 http://www.runoob.com/ 
+  简书   http://www.jianshu.com/ 
+   CSDN          http://www.csdn.net/ 
+】
