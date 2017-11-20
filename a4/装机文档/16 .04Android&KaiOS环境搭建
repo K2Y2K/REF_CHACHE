@@ -1,0 +1,360 @@
+16.04 Android环境搭建
+前期准备：
+    1 个人资料的整理和备份(推荐最好全盘格式化)
+    2 Home目录下的.ssh文件夹，也就是git的id。
+    3 如果不想重装虚拟机的话请备份虚拟机，需要重装虚拟机的话请注意备份邮件的id。
+
+安装和配置步骤：
+    1 使用U盘或者光盘安装ubutu 16.04LTS系统。
+
+    2 安装 git;(强烈建议在这个时候就安装，首先确认是否能够拉代码)
+        sudo apt-get install git
+        安装完成时候将前期保存下来的.ssh文件夹放到Home下面，此时去拉个代码试试是否能能够拉代码。
+        以下这两项是配置name和邮箱的，跟拉代码没有关系，但是在上传代码的时候会要求设置这两项，所以推荐直接配置完：
+        git config --global user.name "Your Name"     #Your Name换成自己的名字，全小写
+        git config --global user.email "Your Name@example.com"        #Your Name@example.com换成自己公司使用的邮箱
+
+        如果是新同事安装的话就按照以下：
+        ssh-keygen -t rsa 
+        在~/.ssh目录下会生成id_rsa.pub文件，拷贝这个文件并修改为你的名字拼音.pub发送给王梁杰完成之后
+
+        在你秘钥放到服务器之后可以尝试拉代码看是够能够成功
+
+    3 安装编译所需的软件包：
+        3.1 添加安装编译环境所需要的源，有以下几种方案，选择一种即可：
+            3.1.1 gedit修改sources.list文件
+                终端命令 编辑sources.list
+                    sudo gedit /etc/apt/sources.list
+                然后在尾部加上需要添加的源
+            3.1.2 更新图形界面工具Software Updater，时间比较长，需要耐心等待。更新完成之后就可以直接在界面上添加相关的源。
+
+            需要添加的源有以下几个：
+                deb http://us.archive.ubuntu.com/ubuntu trusty main universe          #用于mingw32的安装，因为源的原因,直接使用sudo apt-get install mingw32会出问题
+                deb http://download.virtualbox.org/virtualbox/debian precise contrib  #用于virtualbox虚拟机的安装
+        3.2 添加OpenJDK1.7的源：
+            终端添加源，添加成功如安装截图中的 JDK1.7源添加成功.png 所示：
+                sudo add-apt-repository ppa:openjdk-r/ppa
+
+        3.3 添加bcompare的源：
+            终端添加源：
+            wget http://www.scootersoftware.com/bcompare-4.1.9.21719_amd64.deb
+
+        3.4 终端命令 导入公钥(用于虚拟机)
+                wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add - 
+
+        3.5 添加完之后执行以下更新源：
+                sudo apt-get update
+                
+        3.6 sudo apt-get install bison flex gperf tofrodos g++-multilib zip wine curl libxml2-utils mingw32
+            //如果在终端碰到“你希望继续执行吗？【Y/n】”。选择Y。在中途碰到需要licence的选择时，用上下左右的四个方向键，选择“确定”或“是”，然后回车。
+
+    4 安装arm-eabi-4.4.3
+        	将arm-eabi-4.4.3.tar.gz复制到根目录 /opt下
+            sudo cp -r /文件路径/arm-eabi-4.4.3.tar.gz /opt
+            再进入opt文件夹下: cd /opt
+            解压arm-eabi-4.4.3.tar.gz命令是： sudo tar zvxf arm-eabi-4.4.3.tar.gz 
+
+    5 安装OpenJDK，两个都要装的(JB代码需求1.6，KK/L/M代码需求1.7，N代码需求1.8)
+        5.1 安装jdk1.8：
+            16.04默认集成了jdk1.8的源，可直接执行以下安装；
+            sudo apt-get install openjdk-8-jdk
+
+        5.2 安装jdk1.7：
+            因为Ubuntu16.04的安装源已经默认没有openjdk7了，所以要自己手动添加仓库，如果严格按照3中的步骤可以直接执行第三条安装命令进行安装；
+            sudo add-apt-repository ppa:openjdk-r/ppa     #添加源
+            sudo apt-get update                           #更新源
+            sudo apt-get install openjdk-7-jdk            #安装OpenJDK1.7
+            注意，安装JDK1.7的源比较不稳定，如果失败的话请再试一次...
+
+        5.3 安装jdk1.6：
+            这部分是12.04装机文档上的步骤，因时间紧张，本人暂时没去尝试，理论上应该还是有效的，后期如果有问题欢迎补充；
+            a. sudo cp     #文件路径/jdk-6u27-linux-x64.bin /opt
+            b. cd /opt     #进入opt文件下
+            c. sudo chmod a+x jdk-6u27-linux-x64.bin      #给bin文件添加可执行权限
+            d. sudo ./jdk-6u27-linux-x64.bin              #运行安装
+
+    6 GNU make编译器降版本
+        自ubutu15.04及之后，ubutu系统自带的make编译器版本已经是4.1，但是在变异android代码的时候总是报一些莫名其妙的错误，这时候我们需要将make编译器的版本降到3.81版本以支持android代码的编译，具体操作如下(亲测有效)：
+        6.1 下载make3.81的make编译器：
+            终端输入以下命令，然后等待下载完成：
+            wget -o make.tar.gz http://ftp.gnu.org/gnu/make/make-3.81.tar.gz
+        
+        6.2 解压文件并进入make-3.81路径：
+            tar -xvzf make-3.81.tar.gz
+            cd make-3.81
+
+        6.3 执行以下命令：
+            ./configure
+
+        6.4 执行以下，方便日后remove：
+            sh build.sh
+
+        6.5 安装make-3.81：
+            sudo make install
+
+        PS：make install安装的程序如果需要卸载，一般需要以上第四步执行build.sh后的包，再执行：
+            sudo make uninstall
+        即可完成卸载（需要程序支持，很幸运make程序是支持的），所以一般建议保留安装时的安装包。
+
+    环境搭建至此已经基本OK了，此时可以尝试去编译代码，以下是我编译代码的结果：
+        1.编译N代码(验证的是80N的代码，其他未验证)：
+            一次性成功，后续有人出了问题请将问题和解决办法更新到此处。
+
+        2.编译M代码(验证的是80M的代码，其他未验证)：
+            2.1 prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8//x86_64-linux/bin/ld: error: out/host/linux-x86/obj/SHARED_LIBRARIES/libart_intermediates/arch/x86_64/quick_entrypoints_x86_64.o: unsupported reloc 42 against global symbol art::Runtime::instance_
+            ......
+            error: unsupported reloc 42
+            
+            问题原因：
+                网上说法：aosp中的预编译好的ld程序存在bug。
+            解决方法：
+                cp /usr/bin/ld.gold prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.15-4.8//x86_64-linux/bin/ld
+            补充(以下三条跟环境搭建没有关系)：
+                1.这个问题在有的电脑上不会出现，在有的电脑上会出现，现在还不能找出其规律；
+                2.这个方法只是临时方法，但是实际操作上还是需要找到更加合适的方案，看看怎么能在不动源文件的情况下解决这个问题；
+                3.可以尝试写入脚本当中，编译的时候通过脚本进行修改可能会是以后需要考虑的方向；
+
+            2.2 host Prebuilt: jack (out/host/common/obj/JAVA_LIBRARIES/jack_intermediates/jack.jar)
+                clang: error: linker command failed with exit code 1 (use -v to see invocation)
+                build/core/host_shared_library_internal.mk:51: recipe for target 'out/host/linux-x86/obj/lib/libart.so' failed
+                make: *** [out/host/linux-x86/obj/lib/libart.so] Error 1
+            
+            问题原因：
+                网上说法：clang编译器导致的问题。
+            解决方法：
+                在art/build/Android.common_build.mk ,中将host 默认编辑器使用clang关掉，在art/build/Android.common_build.mk文件中搜索：WITHOUT_HOST_CLANG
+                # Host.
+                ART_HOST_CLANG := false
+                ifneq ($(WITHOUT_HOST_CLANG),true)
+                  # By default, host builds use clang for better warnings.
+                  ART_HOST_CLANG := true                                      ###此处将true改成false，编译通过
+                endif
+
+        3.编译L代码(验证的是72L的代码，其他未验证)：
+            3.1 出现类似2.1的问题，解决方案同2.1，但是替换的目标路径需要岁平台代码变化：
+                错误log：
+                prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6//x86_64-linux/bin/ld: error: out/host/linux-x86/obj32/SHARED_LIBRARIES/libsigchain_intermediates/sigchain_dummy.o: unsupported reloc 43 against global symbol std::cout
+                ......
+                prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6//x86_64-linux/include/c++/4.6/iostream:75: error: unsupported reloc 43
+                clang: error: linker command failed with exit code 1 (use -v to see invocation)
+                make: *** [out/host/linux-x86/obj32/lib/libsigchain.so] Error 1
+            解决办法：
+                cp /usr/bin/ld.gold prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.6//x86_64-linux/bin/ld
+
+            3.2 编译72L的代码目前出现以下报错信息，还没有找到比较好的解决方案：
+                out/target/common/obj/PACKAGING/public_api.txt:20: error 5: Added public field android.Manifest.permission.BACKUP
+                out/target/common/obj/PACKAGING/public_api.txt:82: error 5: Added public field android.Manifest.permission.INVOKE_CARRIER_SETUP
+                out/target/common/obj/PACKAGING/public_api.txt:106: error 5: Added public field android.Manifest.permission.READ_PRIVILEGED_PHONE_STATE
+                out/target/common/obj/PACKAGING/public_api.txt:116: error 5: Added public field android.Manifest.permission.RECEIVE_EMERGENCY_BROADCAST
+                target Symbolic: libatciserv_jni (out/target/product/sr6572_wet_l/symbols/system/lib/libatciserv_jni.so)
+                [Compiling] PRIVATE_MODULE = [BSPTelephonyDevTool], PRIVATE_PATH = [vendor/mediatek/proprietary/packages/apps/BSPTelephonyDevTool]
+                target Java: BSPTelephonyDevTool (out/target/common/obj/APPS/BSPTelephonyDevTool_intermediates/classes)
+                [Compiling] PRIVATE_MODULE = [Bluetooth], PRIVATE_PATH = [packages/apps/Bluetooth]
+                target Java: Bluetooth (out/target/common/obj/APPS/Bluetooth_intermediates/classes)
+
+                ******************************
+                You have tried to change the API from what has been previously approved.
+
+                To make these errors go away, you have two choices:
+                   1) You can add "@hide" javadoc comments to the methods, etc. listed in the
+                      errors above.
+
+                   2) You can update current.txt by executing the following command:
+                         make update-api
+
+                      To submit the revised current.txt to the main Android repository,
+                      you will need approval.
+                ******************************
+            解决办法：
+                先update-api之后再remake能编译通过，但要更优的方案。
+            补充：
+                虽然以上的解决方案能编译通过，但是这种方法在实际使用中不太好操作，需要寻求更加使用的解决方案。
+                
+
+        4.编译KK代码：
+
+    7 安装其他部分工具
+        7.1 安装SourceInsight
+            解压并安装source insight（右键exe文件用wine打开）
+        7.2 安装bcompare
+            7.2.1 简便方法：去官网下载bcompare,按照官网说明安装
+                PS：此中安装方式虽然简单，但是有使用时间限制，时长是一个月。时间到了需要去home下面的.config目录中删除bcompare，这样就会重新计时。
+                ---------如果3步骤已经添加了源，可以忽略这两步-----------------------
+                wget http://www.scootersoftware.com/bcompare-4.1.9.21719_amd64.deb
+                sudo apt-get update
+                -------------------------------------------------------------------
+                sudo apt-get install gdebi-core
+                sudo gdebi bcompare-4.1.9.21719_amd64.deb
+                执行完后重启验证是否成功!
+                
+                移除bcompare命令：
+	                sudo apt-get remove bcompare
+
+            7.2.2 老版本方案(亲测可用，没有时间限制)
+                (1). 解压bcompare-3.3.10.17762.tar.gz到主文件夹
+                (2). 将 keygen 文件拷贝到上述解压出的文件夹中
+                (3). 执行解压目录下的install.sh
+
+                sudo ./install.sh
+                [sudo] password for sunzy:
+
+                install prefix? [/usr] /opt
+                ======================================
+                Please place the following in your .bashrc or .cshrc (etc.)
+                export PATH=/opt/bin:$PATH
+                ======================================
+                Executable is /opt/bin/bcompare
+                (4). 执行 keygen，如果没有执行权限，先给权限
+                sunzy@sunzy:~/Downloads/bcompare-3.3.5.15075$ sudo ./keygen
+                =================================================
+                ******              TEAM ZWT               ******
+                ******Keygen&Patch for Beyond Compare Linux******
+                ******           by ygeR@team.zwt          ******
+                =================================================
+                1. Do you want me to patch Beyond Compare?(y/n)y
+                Begin patching...
+                I can't patch.
+                Please check if the file is correct and hasn't been modified!
+                2. Do you want me to generate a valid license?(y/n)y
+                2.a please give me your user name:sunzy993
+                2.b please give me the number of licenses:(max 9999)1
+                2.c please select the Platform(0,Windows;1,Linux;2,Linux/Windows):1
+                2.d please select the Edition(0,Pro;1,Standard):0
+
+                The License key is:
+
+                --- BEGIN LICENSE KEY ---
+                8dsfz+GGuusybmJ-6ROrCrYWNLYeAbCHHRFQffhmz50w8zf3eA2dPPcdt
+                N5LDjGm2TxT5TtdTy-nG7C3rV1hONM1PrkfQr96Czn52qQhjN+bgTr0If
+                atliY4hUdXp40AB64mdbjGOJfeMDNXyaxnzS394D1HS4Hp7O1+Vqwul1U+
+                --- END LICENSE KEY -----
+                Bye! Have a nice day!
+
+                =================================================
+                (5). 请保存上述的license key，第一次使用时用于激活
+
+                (5). 重新执行:sudo ./install.sh (假如报错缺少库文件执行该命令：sudo apt-get install libXft2:i386)
+                (6). 在.bashrc文件末尾加上：export PATH=/opt/bin/bcompare:$PATH
+                (7). 重启
+                (8). 创建bcompare链接：sudo ln -s /opt/bin/bcompare /usr/bin/bcompare
+                -->安装到此部的时候会发现bcompare用不了，终端输入bcompare会提示缺少依赖库，所以还需要安装依赖库才行。
+                (9). 图形界面工具Software Updater添加源：deb http://cz.archive.ubuntu.com/ubuntu precise main
+                    sudo apt-get update
+                    sudo apt-get install libqt3-mt:i386
+                    完成依赖库的安装，重启打开bcompare，输入之前破解的key然后验证右键菜单是否OK。
+
+        7.3 eclipse和Android studio 以及adb的配置：此部分可以自己根据自己的经验进行安装，未必需要参照此部分，个人建议按照自己的方式来：
+	        6.3.1 解压adt-bundle-linux-x86_64-20140702.zip或studio到主目录
+	        6.3.2 右键给~/adt-bundle-linux-x86_64-20140702/sdk/platform-tools/adb添加执行权限    //给sdk/platform-tools/adb添加执行权限
+	        6.3.3 创建adb链接：sudo ln -s ~/adt-bundle-linux-x86_64-20140702/sdk/platform-tools/adb /usr/bin/adb   //注意替换adb路径 
+	        6.3.4 配置sdk工具的环境变量
+		        a. sudo gedit /etc/profile
+		        b. 在文件末尾加入工具的全路径
+			        export PATH=$PATH:/your_android-sdk-linux_path/tools/
+			        export PATH=$PATH:/your_android-sdk-linux_path/platform-tools/
+		        c. source /etc/profile //保存后同步更新
+
+        7.4	安装svn：因为目前代码绝大部分
+            a. sudo apt-get install subversion                           #先察看svn版本，如果不是1.7，则执行下列命令
+            b. sudo apt-add-repository ppa:dominik-stadler/subversion-1.7
+            c. sudo apt-get update
+            d. sudo apt-get install libsvn-java
+            e. sudo apt-get install subversion
+            f. svn --version                     #查看svn版本
+            打开Ubuntu软件中心，搜索kdesvn并安装
+            g. sudo apt-get install kdesvn
+
+        7.5 装虚拟机：(严格按照步骤3操作的话可以跳过1,2,3三步)
+            7.5.1 终端命令 编辑sources.list
+                sudo gedit /etc/apt/sources.list
+
+            7.5.2 添加 软件源将下面的地址加入sources.list 的末尾，保存并退出
+                deb http://download.virtualbox.org/virtualbox/debian precise contrib
+
+            7.5.3 终端命令 导入公钥，并更新源
+                wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add - 
+                sudo apt-get update
+                (PS:本人没有采用sources.list添加的这种方案，是通过ubutu的可视化工具Software Updater工具添加的源)
+
+            7.5.4 终端命令安装（4.3是当前最新版本） 
+                方式1：
+                    sudo apt-get install virtualbox-4.3      #这是老的版本，现在的话不知道具体是什么版本
+                    (PS:有时候virtualbox服务器速度不稳定，这一步执行很慢)，可以使用另一种方法）
+                方式2(推荐):
+                    a.去https://www.virtualbox.org/wiki/Linux_Downloads下载相关的安装包，该网站直接下载的是5.2.0版本(或者去127上面直接使用服务器上面的5.1的工具)的工具，下载之后通过：
+                        sudo dpkg -i 下载文件
+                        (可能会出现以下错误：dpkg: dependency problems prevent configuration of virtualbox-5.2:
+                                            virtualbox-5.2 depends on libsdl1.2debian (>= 1.2.11); however:
+                                            Package libsdl1.2debian is not installed.
+                        因为缺少libsdl1.2debian，执行sudo apt-get install libsdl1.2debian之后再重新安装。)
+
+            7.5.5 将当前用户添加到 用户组vboxusers，以支持usb. 注：添加完成后要注销后重新登录才会生效 
+                sudo usermod -a -G vboxusers ysq 
+                PS：ysq为当前电脑用户名，根据自己的电脑名称进行修改
+                    
+            7.5.6 安装 VirtualBox扩展包，以支持USB2.0等 ,版本要与VirtualBox一致。
+                ubutu下文件夹中有Oracle_VM_VirtualBox_Extension_Pack-xxxxxx.vbox-extpack(xxxxxx为版本)，右键选择 Oracle vm virtualbox，完成之后进入虚拟机，点击Device->Insert Guest Additions CD Image,然后双击打开计算机会多一个Virtubox的图标，双击之后进行增强包的安装。
+
+            7.5.7 安装完之后需要重新添加端口以支持刷机工具。(如果不行的话请重装下驱动然后ubutu和虚拟机都重启下看是否OK)
+
+
+            新安装的电脑可能需要装以下的办公常用工具：
+            7.5.8 新建虚拟系统winxp或win7
+                a:下载安装notes,foxmail(记得备份替换foxmail7.2/storage/***@sagereal.com)
+                b:下载安装RTX
+                c:下载安装QQ
+                d:安装驱动	Driver_Auto_Installer_EXE_v1.1352.00
+
+
+选择安装部分：
+    1 安装输入法：(此处针对的是搜狗输入法，16.04默认有中文的，不需要的请忽略，自己研究下怎么调出系统的中文输入法)
+
+        搜狗输入法linux版本安装(不懂如何做的可以问我)：
+        1、安装fcitx：sudo apt-get install fcitx 
+        2、安装fcitx的配置工具：sudo apt-get install fcitx-config-gtk
+        3、安装fcitx的table-all软件包:sudo apt-get install fcitx-table-all
+        4、安装im-switch切换工具：sudo apt-get install im-switch
+        执行完以上的部分，在Language Support中选择：fctix，然后注销重新进入。
+        进入之后在系统输入法中添加搜狗输入法即可！
+
+    2 TeamViewer安装：
+        2.1 直接https://www.teamviewer.com/zhcn/download/linux/下载最新的Linux TeamViewer软件包：
+        
+        2.2 直接执行 sudo dpkg -i 软件包 会出现错误，原因是我们的ubuntu系统是64位的，TeamViewer是32位架构，必须添加32位的架构
+            sudo dpkg --add-architecture i386
+            sudo apt-get update
+            sudo apt-get -f install
+
+        2.3 执行 sudo dpkg -i 软件包    安装
+
+    3 各位还有什么使用的软件，可以将用途以及安装方式和可能出现的问题放到此处。
+
+16.04 KaiOS环境搭建
+前期准备：
+    暂无
+
+安装和配置步骤：
+    1 完成ubutu 16.04LTS系统的安装。
+
+    2 打开64位 Ubuntu 的32位支持功能
+        sduo apt-get update
+        sudo dpkg --add-architecture i386
+        sudo dpkg --add-architecture amd64
+
+    3 安装编译KaiOS的系统环境：
+        sudo apt-get install -y --no-install-recommends ssh libxt6 bc autoconf2.13 bison bzip2 ccache curl flex gawk gcc g++ g++-multilib git lib32ncurses5-dev lib32z1-dev libgconf2-dev zlib1g zlib1g-dev libgl1-mesa-dev libx11-dev make zip lzop libxml2-utils openjdk-8-jdk nodejs unzip python vim
+
+        curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+        sudo apt-get update && sudo apt-get install -y nodejs build-essential
+        sudo npm install -g npm@4
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+        echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+        sudo apt-get update && sudo apt-get install -y yarn
+    
+    /****************************请暂时先别装webpack*****************************************/
+    4 安装WebPack
+        首先保证安装了Node.js， Node.js 自带了软件包管理器 npm。然后执行以下：
+            sudo npm install webpack -g          #安装webpack
+        如果要使用webpack开发工具，要单独安装 webpack-dev-server：
+            sudo npm install webpack-dev-server --save-dev
+

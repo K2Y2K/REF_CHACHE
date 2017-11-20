@@ -1,0 +1,549 @@
+1.安装bcompare
+【1. Do you want me to patch Beyond Compare?(y/n)y
+Begin patching...
+Patch and Backup(BCompare.bak) success!
+2. Do you want me to generate a valid license?(y/n)y
+2.a please give me your user name:ldx
+2.b please give me the number of licenses:(max 9999)1
+2.c please select the Platform(0,Windows;1,Linux;2,Linux/Windows):1
+2.d please select the Edition(0,Pro;1,Standard):0
+
+- BEGIN LICENSE KEY ---
+4fH6ltsL10NjsjMLfIVx3NdrPNmCjtGRSK+4+RzUxc+9nC+ZKwAKznaUI
+pr8LvoeUYwBwdz0-HXqu32OCBXHINM1PrkfQr96Czn52qQhjN+bgTr0If
+atliY4hUdXp40AB64mdbjGOJfeMDNXyaxnzS394D1HS4Hp7O1+Vqwul1U+
+--- END LICENSE KEY -----
+
+】
+
+2.给与权限 命令：sudo chmod u+x keygen
+3.
+在Linux系统下Vi命令模式和编辑模式如何切换？
+
+VI编辑器是Linux下用的最多也是功能最强大的文本编辑器，VI具有三种模式：命令模式、编辑模式以及末行模式，在最初使用VI打开一个文件的时候，处在命令模式下，这时使用命令i、I、a、A、o、O都可以进入编辑模式，而想放回到命令模式只需要在编辑模式下敲击ESC键即可。
+
+如果是vi，则：Esc 退出编辑模式，输入以下命令：
+:wq  保存后退出vi，若为 :wq! 则为强制储存后退出（常用）
+:w    保存但不退出（常用）
+:w!   若文件属性为『只读』时，强制写入该档案
+:q    离开 vi （常用）
+:q!   若曾修改过档案，又不想储存，使用 ! 为强制离开不储存档案。
+:e!   将档案还原到最原始的状态！
+
+4.打开编辑器
+ vi ~/.bashrc
+sudo gedit .bashrc
+
+5.如何在VirtualBox虚拟机软件上安装Win7虚拟系统
+jingyan.baidu.com/article/414eccf64ce6a36b431f0a93.html;
+
+电脑和虚拟机virtual box如何传文件:
+http://blog.csdn.net/pan_tian/article/details/22619687;
+
+6.安装android studio
+在 Ubuntu 15.04 上安装 Android Studio
+
+打开terminal，输入以下命令
+
+    sudo apt-add-repository ppa:paolorotolo/android-studio
+    sudo apt-get update
+    sudo apt-get install android-studio
+
+如果要把Android Studio添加到启动栏，你需要如下操作
+
+打开Android Studio，点击Configure选择Create Desktop Entry，这样Android Studio应该在dash中创建快捷方式了。
+【
+　　Ｕｂｕｎｔｕ12.04的eclipse默认不能固定到启动器上，可以通过一下方法添加：
+		a、在主文件下新建一个空白文档；
+		b、将以下内容拷贝到文档中：
+			[Desktop Entry]
+			Encoding=UTF-8
+			Name=Eclipse
+			Comment=Eclipse IDE
+			Exec=/home/ysq/adt-bundle-linux-x86_64-20140321/eclipse/eclipse
+			Icon=/home/ysq/adt-bundle-linux-x86_64-20140321/eclipse/icon.xpm
+			Terminal=false
+			StartupNotify=true
+			Type=Application
+			Categories=Application;Development;
+		c、拷贝时请注意去掉每一行的前后空格，并修改Exec=/home/ysq/adt-bundle-linux-x86_64-20140321/eclipse/eclipse和Icon=/home/ysq/adt-bundle-linux-x86_64-20140321/eclipse/icon.xpm的路径；
+		d、保存完成后将文档名命名为"eclipse.desktop"；
+		e、给该文件赋权 ,运行“chmod u+x eclipse.desktop“命令即可，或者直接右键点击文档-》属性-》权限，勾上“允许做为程序执行文件”；
+		f、双击执行该文件，然后就可以在启动器上勾选“锁定到启动器”了。
+】
+【 Ubuntu下创建启动Android studio的快捷方式 http://blog.csdn.net/mkosto/article/details/52972128】
+7.ubuntu14.04 安装android studio：
+www.linuxidc.com/Linux/2016-03/129051.htm;
+blog.csdn.net/bettarwang/article/details/44871583;
+blog.csdn.net/lsyz0021/article/details/52215996；
+
+8.由于Ubuntu 14.04 64bit上缺少一些库文件，因而要先安装好这些库文件，执行如下命令：
+sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+
+9.配置android studio 的环境
+export PATH="$PATH:/home/lidongxue/android-studio/bin"
+
+
+10. sudo gedit .bashrc:
+
+export PATH=/opt/bin/bcompare:$PATH
+export PATH=$PATH:/home/lidongxue/android-studio/bin
+
+
+11.安装eclipse
+
+
+
+配置jdk　mysql　openfire过程
+一　、卸载
+lidongxue@lidongxue-ThinkStation-P310:~$ java -version
+openjdk version "1.8.0_141"
+OpenJDK Runtime Environment (build 1.8.0_141-8u141-b15-3~14.04-b15)
+OpenJDK 64-Bit Server VM (build 25.141-b15, mixed mode)
+重新安装后
+lidongxue@lidongxue-ThinkStation-P310:~$ java -version
+java version "1.8.0_144"
+Java(TM) SE Runtime Environment (build 1.8.0_144-b01)
+Java HotSpot(TM) 64-Bit Server VM (build 25.144-b01, mixed mode)
+
+
+
+二、使用ＭｙＳＱＬ
+１、-- 创建数据库时,设置数据库的编码方式 
+-- CHARACTER SET:指定数据库采用的字符集,utf8不能写成utf-8
+-- COLLATE:指定数据库字符集的排序规则,utf8的默认排序规则为utf8_general_ci（通过show character set查看）
+drop database if EXISTS dbtest;
+create database dbtest CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+-- 修改数据库编码
+alter database dbtest CHARACTER SET GBK COLLATE gbk_chinese_ci;
+alter database dbtest CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+查看Mysql表结构的命令，如下:
+
+desc 表名;
+show columns from 表名;
+describe 表名;
+show create table 表名;
+查看数据库：show databases;
+use 数据库名;
+show tables;
+
+２．【
+为Openfire创建一个数据库
+
+首先，登陆mysql server
+
+    sudo mysql -u root -p  
+
+提示输入密码，输入之前第4步中提示输入的root密码。
+
+进入mysql后，创建数据库：
+
+    mysql> CREATE DATABASE dbopenfire CHARACTER SET='utf8';  
+    mysql> GRANT ALL PRIVILEGES ON dbopenfire.* TO openfire@localhost IDENTIFIED by 'openfirepwd';  
+    mysql>flush privileges;  
+    mysql>quit  
+】
+
+
+jdbc:mysql://localhost:3306/openfire?rewriteBatchedStatements=true
+修改为
+jdbc:mysql://localhost:3306/dbopenfire?useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8
+
+用户：root;密码：123456lee;
+
+登录openfire管理控制台(http://127.0.0.1:9090/index.jsp)的用户是admin;密码是123456lee;
+
+
+三、
+2.修改管理员密码，转自他人方法：
+
+a.使用MySQL查看工具进入数据库，进入表“ofuser”，将该表清空，然后执行该SQL
+
+INSERT INTO ofUser (username, plainPassword, name, email, creationDate, modificationDate)
+VALUES (‘admin’, ‘admin’, ‘Administrator’, ‘admin@example.com’, ‘0’, ‘0’);
+
+INSERT INTO ofUser (username, plainPassword, name, email, creationDate, modificationDate)
+VALUES (‘lee’, ‘lee’, ‘Administrator’, ‘admin@example.com’, ‘0’, ‘0’);
+
+b.关闭openfire服务，就是从其控制台stop然后再start，再用用户名：admin,密码：admin登录即可
+
+这一套其实是可行的，但是如果你是重新配置Openfire服务器的时候你连接的是同一个数据库的时候，你需要现将原来数据库清空，而不能仅仅只修改个OfUser表，因为数据库中的其他表也会有所改动，之前的操作
+
+
+四、
+
+、ubuntu 14.04LTS上(java8)安装Openfire服务器端 
+
+【
+即时通讯中，有多种协议可以使用，其中目前最流行的莫过于XMPP和MQTT了。
+
+而XMPP协议其基于XML的基因，有着易用性的传统，因此得到了更多的支持；服务器端的实现也有很多，这里讲讲如何在ubuntu上进行安装。
+
+1. 安装前环境
+
+ubuntu 14.04 LTS
+
+Internet 连接
+
+2. 确保系统为最新组件
+
+[plain] view plain copy
+
+    sudo apt-get update  
+    sudo apt-get upgrade  
+
+
+3. 安装oracle的JRE环境，并且将PPA放进去
+
+[plain] view plain copy
+
+    sudo apt-get install python-software-properties  
+    sudo add-apt-repository ppa:webupd8team/java  
+    sudo apt-get update  
+
+
+如果您正在使用OpenJDK，最好先移除以免产生冲突：
+
+[plain] view plain copy
+
+    sudo apt-get remove --purge openjdk*  
+
+
+然后，下载和安装Oracle Java 8
+
+[plain] view plain copy
+
+    sudo apt-get install oracle-java8-installer  
+
+
+这一步可能会比较慢，视网速而定。但是天朝的网络，你懂的
+
+4、安装mysql数据库
+
+[plain] view plain copy
+
+    sudo apt-get install mysql-server  
+
+
+5、为Openfire创建一个数据库
+
+首先，登陆mysql server
+
+[plain] view plain copy
+
+    sudo mysql -u root -p  
+
+提示输入密码，输入之前第4步中提示输入的root密码。
+
+进入mysql后，创建数据库：
+
+[plain] view plain copy
+
+    mysql> CREATE DATEBASE dbopenfire CHARACTER SET='utf8';  
+    mysql> GRANT ALL PRIVILEGES ON dbopenfire.* TO openfire@localhost IDENTIFIED by 'openfirepwd';  
+    mysql>flush privileges;  
+    mysql>quit  
+
+
+6、下载安装最新的openfire deb包, 您可以从http://www.igniterealtime.org/downloads/index.jsp 来获取相应的信息，这里最新的为openfire 3.9.3版本
+
+[plain] view plain copy
+
+    wget http://www.igniterealtime.org/downloadServlet?filename=openfire/openfire_3.9.3_all.deb  
+    mv downloadServlet\?filename\=openfire%2Fopenfire_3.9.3_all.deb openfire_3.9.3_all.deb  
+
+
+再使用dpkg命令安装：
+
+[plain] view plain copy
+
+    sudo dpkg -i openfire_3.9.3_all.deb   
+
+
+这时候，系统可能会提示openfire的文件夹用户所有人不属于当前用户，可以进行更改成当前用户：
+
+[plain] view plain copy
+
+    cd /var/lib/  
+    sudo chown -hR root openfire/  
+
+
+
+一般openfire安装在/var/lib 文件夹下。
+
+7、配置防火墙：
+
+这里，如果做实验，你可以直接关掉防火墙：
+
+[plain] view plain copy
+
+    sudo ufw disable  
+
+
+或者，打开一些openfire需要的端口：
+
+[plain] view plain copy
+
+    sudo ufw allow 9090/tcp  
+    sudo ufw allow 9091/tcp  
+    sudo ufw allow 5222/tcp  
+    sudo ufw allow 7777/tcp 
+ 
+    sudo ufw allow 7443/tcp  
+    sudo ufw allow 7070/tcp  
+    sudo ufw allow 3478/tcp  
+    sudo ufw allow 3479/tcp  
+
+
+这时，基本上openfire就安装成功了。确保再次成功地开启了openfire:
+
+[plain] view plain copy
+
+    sudo /etc/init.d/openfire restart  
+
+
+8、经过以上配置，openfire安装就已经完成，接下来就可以通过浏览器来配置了：
+
+[plain] view plain copy
+
+    http://IP:9090/setup/index.jsp  
+
+
+这个过程相对比较简单，几乎是所见即所得的傻瓜式配置流程，就不赘述了。
+
+9、客户端的问题：
+
+在XMPP的解决方案中，有服务器端肯定得有客户端了。这里，客户端推荐同样是openfire网站下的spark来进行测试。其跨mac、windows、linux三平台可以比较好的进行对接调试。同样也不赘述了。
+
+】
+
+五、
+安装scala
+
+接着我们需要安装scala具体的安装过程和jdk很像，
+首先也是创建安装目录
+
+sudo mkdir /usr/lib/scala
+
+
+然后是将压缩包解压缩（是在scala-2.12.3.tgz的目录下执行解压）
+
+sudo tar -zxvf scala-2.12.3.tgz -C /usr/lib/scala
+
+最后打开/etc/profile（sudo gedit /etc/profile）,在最后添加配置
+siou
+export SCALA_HOME=/usr/lib/scala/scala-2.11.8
+export PATH=${SCALA_HOME}/bin:$PATH
+
+退出后，进行source /etc/profile ；
+
+在终端中输入：scala　显示Welcome to scala......表示安装成功。
+
+然后在这里输入
+：quit
+退出scala。
+
+
+【
+解压缩文件包，可将其移动至/usr/local/share下：
+
+mv scala-2.11.7 scala                   # 重命名 Scala 目录
+mv /download/scalapath 　/usr/local/share # 移动文件　的命令
+】
+
+六、
+安装Spark
+
+    下载Spark： http://spark.apache.org/downloads.html
+给spark一个安装目录
+
+sudo mkdir /usr/lib/spark
+
+解压缩文件
+
+sudo tar -zxvf spark-1.6.1-bin-hadoop2.6.tgz -C /usr/lib/spark
+
+在/etc/profile中配置
+
+export SPARK_HOME=/usr/lib/spark/spark-1.6.1-bin-hadoop2.6
+export PATH=${SPARK_HOME}/bin:$PATH
+然后执行保存：
+source /etc/profile
+之后，执行
+pyspark：进入安装成功界面；再输入quit()　退出。
+
+
+
+测试
+
+    在命令行输入：spark-shell（可在安装目录中bin里面找到）
+　　　　　　　　　　　　　　　　　　　　进入安装成功界面。
+    
+    进入bin目录，输入./run-example SparkPi 10(迭代次数) 计算π的值
+
+    bin目录： 
+
+
+
+七、安装ｔｏｍｃａｔ
+　sudo mkdir /usr/lib/tomcat;
+sudo tar -zxvf spark-1.6.1-bin-hadoop2.6.tgz -C /usr/lib/tomcat;
+(在这个路径下/usr/lib/tomcat/apache-tomcat-8.0.47$)添加jdk和jre:sudo gedit./bin/startup.sh;  【执行到本部】【/usr/lib/jvm/java-8-oracle$ 】【/usr/lib/tomcat/apache-tomcat-8.0.47】
+打开startup.sh文件后，添加jdk和jre:
+
+##2017/10/14添加jdk和jre环境变量
+JAVA_HOME=/usr/lib/jvm/java-8-oracle
+JRE_HOME=$JAVA_HOME/jre
+PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME
+CLASSPATH=.:$JRE_HOME/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+TOMCAT_HOME=/usr/lib/tomcat/apache-tomcat-8.0.47
+
+
+然后执行保存：
+source /etc/profileｄ ｃｄ
+
+启动tomcat：
+
+ sudo ./bin/startup.sh;
+
+重启tomcat
+cd /usr/lib/tomcat/bin
+./shutdown.sh
+./startup.sh
+验证tomcat配置和安装是否成功：
+在浏览器中输入：http://localhost:8080／回车。
+然后显示出tomcat版本的信息等。
+Apache Tomcat/8.0.12;
+安装成功；
+
+八、两个模拟器间的通信；【http://blog.163.com/fanning_7213/blog/static/2496505201137101721665/】
+【telnet连接到console，启动的第一个模拟器的console端口是5554（后面启动的模拟器依次增加2,因为一个模拟器占用两个端口，5555是留给adb的，若后面又开了一个模拟器，那么console端口就是5556）；每个模拟器的IP都是10.0.2.15，而它所运行在的PC机的IP地址是10.0.2.2，】
+adb devices
+
+telnet localhost 5554【暂设定5554是API25】
+ 【sudo gedit .emulator_console_auth_token　该命令查找auth_token】
+auth Sxgs0B18e5hy16XP
+
+redir add tcp:8192:8191【设置8192server端口号即客户端要监听的端口号， 8191client端口号；8191作为5554的端口，别的模拟器可以通过连接10.10.2.2:8192端口来转接到5554 的8191端口上。】
+【redir add protocol:host-port:guest-port　　redir del protocol:host-port】
+
+
+【问题描述：执行redir add tcp:8192:8191 
+出现问题：KO: unknown command, try 'help'
+解决办法：auth Sxgs0B18e5hy16XP】
+
+
+九、测试tomcat是否能连接Mysql
+cd /usr/lib/tomcat/apache-tomcat-8.0.47/webapps
+mkdir test
+
+touch index.jsp
+vim index.jsp
+
+
+为tomcat引入mysql的连接jar包：
+sudo cp -r mysql-connector-java-5.1.21-bin.jar /usr/lib/tomcat/apache-tomcat-8.0.47/lib;
+
+十、命令操作模拟器
+ 1. 安装Android应用程序
+
+1) 启动Android模拟器
+
+2) adb install (apk在PC上的路径/)*.apk （将apk文件上传到了模拟器自带操作系统的data/app目录下了）
+
+3) Android模拟器界面中浏览打开apk应用程序
+
+2. 删除Android应用程序
+
+删除Android有好几种方法。
+
+第一种：命令行用uninstall
+
+adb uninstall apk的包名（用EC切换到DDMS的File Explorer中查看，data/data下）
+
+第二种：命令行进入模拟器操作系统
+
+adb shell （进入模拟器自带的操作系统）
+
+cd data/app （切换到apk的安装目录）
+
+rm ***.apk （用EC切换到DDMS的File Explorer中查看，data/app下）
+
+３． 安装、卸载和运行程序（adb install、adb uninstall和am）
+
+在Eclipse中运行Android程序必须得有Android源码工程。那如果只有apk文件（Android应用程序的发行包，相当于Windows中的exe文件）该如何安装和运行呢？答案就是adb命令。假设我们要安装一个ebook.apk文件，可以使用如下的命令。
+
+adb install ebook.apk
+
+假设ebook.apk中的package是net.blogjava.mobile.ebook，可以使用如下的命令卸载这个应用程序。
+
+adb uninstall net.blogjava.mobile.ebook
+
+关于package的概念在以后的学习中会逐渐体会到。现在只要知道package是Android应用程序的唯一标识即可。如果在安装程序之前，该程序已经在模拟器或真机上存在了，需要先使用上面的命令卸载这个应用程序，然后再安装。或使用下面的命令重新安装。
+
+adb install -r ebook.apk
+
+在卸载应用程序时可以加上-k命令行参数保留数据和缓冲目录，只卸载应用程序。命令如下所示。
+
+adb uninstall -k net.blogjava.mobile.ebook
+
+如果机器上有多个模拟器或真机实例，需要使用-s命令行参数指定具体的模拟器或真机。例如，下面的命令分别在模拟器和真机上安装、重新安装和卸载应用程序。
+
+在emulator-5554模拟器上安装ebook.apk
+
+adb -s emulator-5554 install ebook.apk
+
+在真机上安装ebook.apk
+
+adb -s HT9BYL904399 install ebook.apk
+
+在emulator-5554模拟器上重新安装ebook.apk
+
+adb -s emulator-5554 install -r ebook.apk
+
+在真机上重新安装ebook.apk
+
+adb -s HT9BYL904399 install -r ebook.apk
+
+在emulator-5554模拟器上卸载ebook.apk（不保留数据和缓冲目录）
+
+adb -s emulator-5554 uninstall net.blogjava.mobile.ebook
+
+在真机上卸载ebook.apk（保留数据和缓冲目录）
+
+adb -s HT9BYL904399 uninstall -k net.blogjava.mobile.ebook
+
+如果想在模拟器或真机上运行已安装的应用程序，除了直接在模拟器或真机上操作外，还可以使用如下的命令直接运行程序。
+
+在emulator-5554模拟器上运行ebook.apk
+
+adb -s emulator-5554 shell am start -n net.blogjava.mobile.ebook/net.blogjava.mobile.ebook.Main
+
+在真机上运行ebook.apk
+
+adb -s HT9BYL904399 shell am start -n net.blogjava.mobile.ebook/net.blogjava.mobile.ebook.Main
+
+其中Main是ebook.apk的主Activity。相当于Windows应用程序的主窗体或Web应用程序的主页面。am是shell命令。
+
+
+十、安装gerrit
+下载代码
+      正确配置好邮箱(lidongxue(123456))和ssh公钥(lidongxue.pub)后，根据Gerrit管理员给出的地址下载代码
+      如：git clone ssh://用户名@192.168.3.79:29418/test.git
+
+下载commit-msg脚本
+      使用Gerrit必须要有此脚本
+
+      1. 拷贝脚本到本地(192.168.3.127/02_sw/127文件目录/02_工具TOOL/智能机/commit-msg脚本/commit-msg)
+      scp -P 29418 -p 192.168.42.21:/hooks/commit-msg .
+ 
+       2. 把脚本拷贝到git钩子路
+       sudo cp commit-msg /usr/share/git-core/templates/hooks
+      sudo  chmod +x /usr/share/git-core/templates/hooks/commit-msg
+
+
+
+

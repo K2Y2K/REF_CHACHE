@@ -1,0 +1,80 @@
+ 一、关于Android studio 项目的链接
+Android github上优秀开源项目分类汇总 
+http://blog.csdn.net/zhangxichao100/article/details/52579151;
+
+Android studio怎么从Github克隆下载源代码:http://jingyan.baidu.com/article/db55b609fdbd6d4ba20a2f7d.html;
+
+从github上下载的android开源项目却不知如何导入die以方便高效地查看？
+http://jingyan.baidu.com/article/8cdccae969dc58315413cd29.html；
+
+ 从github下载最新Android源码 ：
+http://blog.csdn.net/robertbaker/article/details/41700663；
+
+
+Android开源项目第三篇——优秀项目篇
+http://www.trinea.cn/android/android-open-source-projects-excellent-project/；
+
+
+
+如果在编程过程中，遇到错误提示，alt+Enter(即按照alt键的同时按下回车键)可以自动进行错误修复。
+
+Android开发入门经典实例 :
+http://blog.csdn.net/it_beecoder/article/details/52662142;
+
+AndroidStudio项目提交（更新）到github最详细步骤 :
+http://blog.csdn.net/u013634928/article/details/53022005;
+
+ Android studio 导入github工程 
+http://blog.csdn.net/feixiaku/article/details/45155587/;
+
+
+https://stackoverflow.com/questions/34421193/could-not-determine-the-dependencies-of-task-appcrashlyticsstoredeobsdebug-i
+
+类似微信app开发：
+http://www.cocoachina.com/bbs/read.php?tid=324657
+https://github.com/tbl00c/iOSAppTemplate
+
+项目源码地址：
+GitHub：https://github.com/GitLqr/LQRWeChat
+码云：https://git.oschina.net/CSDNLQR/lqrwechatrongcloud
+APK地址：https://github.com/GitLqr/LQRWeChat/blob/master/app-debug.apk；
+
+https://github.com/b3log/symphony-weapp；
+https://hacpai.com/tag/book_share；
+https://github.com/opendigg/awesome-github-wechat-weapp了；
+
+关于新闻app 的项目：
+https://git.oschina.net/QiHuangQi/News.git;
+OPENDIGG网站
+http://www.opendigg.com/；
+
+https://stackoverflow.com/；
+
+码云：http://git.oschina.net/；
+
+二、关于app项目
+
+
+    app/src/main/AndroidManifest.xml
+
+    Android Manifest文件是描述Android应用的基本信息，并定义了应用中的各个组件（Activity是一种组件）。
+
+    ）app/src/main/res目录下包含了应用所需要的资源文件：
+        drawable<density>/ - 图片资源文件
+        layout/ - 用户界面布局描述文件
+        menu/ - 应用的菜单布局
+        values/ 常量值例如字符串、颜色数值等
+        strings/ 国际化数据
+
+
+
+注意初始化Adapter的代码ArrayAdapter<String> teacherAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Teacher.getAllTeachers());三个参数的含义：
+
+    第一个参数是this，表示传入的是当前的Activity
+    第二个参数是android.R.layout.simple_list_item_1，这是Android系统自带的一个列表元素（即列表中的每一行）布局，只显一串简单的文字
+    第三个参数是需要显示的所有数据构成的List，即数据源
+
+三。A First Glance at Android’s RecyclerView：
+https://github.com/gabrielemariotti/RecyclerViewItemAnimators。
+
+ 

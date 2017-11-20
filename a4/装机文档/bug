@@ -1,0 +1,47 @@
+1.未解决（安装bcompare 采取方法二 执行到第9步出现的问题）（好像不影响使用）
+lidongxue@lidongxue-ThinkStation-P310:~$ sudo apt-get install libqt3-mt:i386
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package libqt3-mt:i386 is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+
+E: Package 'libqt3-mt:i386' has no installation candidate
+
+2.记录申请git帐号过程：
+lidongxue@lidongxue-ThinkStation-P310:~$ git config --global user.name "Lidongxue" 
+lidongxue@lidongxue-ThinkStation-P310:~$ git config --global user.email "Lidongxue@example.com" 
+lidongxue@lidongxue-ThinkStation-P310:~$ ssh-keygen -t rsa 
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/lidongxue/.ssh/id_rsa): 
+Created directory '/home/lidongxue/.ssh'.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/lidongxue/.ssh/id_rsa.
+Your public key has been saved in /home/lidongxue/.ssh/id_rsa.pub.
+The key fingerprint is:
+80:b1:2e:c2:78:9d:ad:e7:2d:a8:5c:88:71:f0:f6:7a lidongxue@lidongxue-ThinkStation-P310
+The key's randomart image is:
++--[ RSA 2048]----+
+|    .            |
+|     +           |
+|.   o .          |
+|oo o o .         |
+|+.* + . S        |
+| B + .           |
+|. . +..          |
+| . oEo..         |
+|  +o  ...        |
++-----------------+
+3 、打开模拟器时问题描述：
+KVM is required to run this AVD.
+/dev/kvm is not found.
+Enable VT-x in your BIOS security settings, ensure that your Linux distro has working KVM module.
+【已解决：进入biot（F12）设置vitualization technology 的value 值为 enable】
+
+http://blog.csdn.net/chenyuan_jhon/article/details/70810305?locationNum=2&fps=1;
+
+http://blog.csdn.net/achirandliu/article/details/70037934?locationNum=8&fps=1;
+
+

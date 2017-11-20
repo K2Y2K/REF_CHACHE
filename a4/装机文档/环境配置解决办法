@@ -1,0 +1,253 @@
+一.ubuntu14 64位 JDK1.8改JDK1.7
+
+版权声明：本文为博主原创文章，未经博主允许不得转载。
+
+华为软件精英算法比赛，官网要求JDK7，电脑原来的JDK8编译的结果提交运行错误。
+
+记录下JDK7重载过程，后面还得改回JDK8。
+
+1. 新建文件夹（已经存在，忽略此步骤）：sudu mkdir /usr/lib/jvm
+
+2. jdk-7的解压文件 jdk1.7.0_79放到1中的/usr/lib/jvm文件夹下，原来的jdk1.8.0_92留着以后切换回来用
+
+3. 环境变量 ：sudo gedit /etc/profile，
+
+   原来的设置如下：
+
+    export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_92  
+    export JRE_HOME=${JAVA_HOME} /jre
+    export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+    export PATH={JAVA_HOME} /bin:$PATH
+
+   修改后的设置如下：
+
+    export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_79  (只改了这里)  
+    export JRE_HOME=${JAVA_HOME} /jre
+    export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+    export PATH=${JAVA_HOME} /bin:$PATH
+
+4. 设置默认的.jdk
+
+    sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.7.0_79/bin/java 300  
+    sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk1.7.0_79/bin/javac 300  
+    sudo update-alternatives --config java (需要选择系统已有的jdk序号)
+
+5. 验证JDK: java -version
+
+
+6.如果更改后发现jdk版本仍然没有转换过来，重启试试看（我更改系统变量文件 /etc/profile 后，一般能立即生效，有些时候却没有，暂不知原因）  
+
+
+二。
+【解压.zip文件】
+
+Ubuntu中貌似已经安装了unzip软件，解压命令如下：
+1
+	
+unzip  ./FileName.zip
+
+如果没安装unzip的话，可以通过如下命令安装：
+1
+	
+sudo apt-get install unzip
+
+ zip -r myfile.zip ./*
+将当前目录下的所有文件和文件夹全部压缩成myfile.zip文件,－r表示递归压缩子目录下所有文件.
+
+
+（
+ zip -r data.zip data
+
+解释：将data文件夹压缩成了data.zip格式。
+
+unzip data.zip
+
+解释：将data.zip文件解压到当前文件夹。　
+unzip data.zip -d ./b（将data.zip文件解压到当前文件下的b文件夹中，如果b不存在则自动创建））
+
+【解压.rar文件】 
+
+#安装unrar软件#
+1
+	
+sudo apt-get install unrar
+
+#卸载unrar软件#
+1
+	
+sudo apt-get remove unrar
+
+#解决.rar文件#
+1
+	
+unrar x ./FileName.rar
+ 
+（unrar x vpsyou.rar //解压 vpsyou.rar 到当前目录
+rar a vpsyou.rar ./vpsyou.com/ 　　　//将 vpsyou.com 目录打包为 vpsyou.rar）
+解压
+
+　　tar –xvf file.tar //解压 tar包
+
+　　tar -xzvf file.tar.gz //解压tar.gz
+
+　　tar -xjvf file.tar.bz2 //解压 tar.bz2
+
+　　tar –xZvf file.tar.Z //解压tar.Z
+
+　　unrar e file.rar //只会把压缩包里的文件解压出来，文件包没有了，解压rar
+
+　　unzip file.zip //解压zip
+压缩
+
+　　tar –cvf jpg.tar *.jpg //将目录里所有jpg文件打包成tar.jpg
+
+　　tar –czf jpg.tar.gz *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz
+
+　　tar –cjf jpg.tar.bz2 *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2
+
+　　tar –cZf jpg.tar.Z *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z
+
+　　rar a jpg.rar *.jpg //rar格式的压缩，需要先下载rar for linux
+
+　　zip jpg.zip *.jpg //zip格式的压缩，需要先下载zip for linux
+tar 命令详解
+
+　　-c: 建立压缩档案
+
+　　-x：解压
+
+　　-t：查看内容
+
+　　-r：向压缩归档文件末尾追加文件
+
+　　-u：更新原压缩包中的文件
+
+　　这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。
+
+　　-c: 建立压缩档案
+
+　　-x：解压
+
+　　-t：查看内容
+
+　　-r：向压缩归档文件末尾追加文件
+
+　　-u：更新原压缩包中的文件
+
+　　下面的参数-f是必须的
+
+　　-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。
+三 安装android studio 
+安装32位库
+
+Android SDK中的adb程序是32位的，Ubuntu x64系统需要安装32位库文件，用于兼容32位的程序。
+
+sudo apt-get install -y libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1
+
+    1
+
+安装Android SDK
+安装jdk
+
+sudo apt-get install openjdk-7-jdk
+
+    1
+
+安装SDK
+
+下载不含IDE的纯SDK：
+国内镜像：http://dl.gmirror.org/android/android-sdk_r24.4.1-linux.tgz
+
+wget http://dl.gmirror.org/android/android-sdk_r24.4.1-linux.tgz 
+
+    1
+
+解压：
+
+tar -zxvf android-sdk_r24.4.1-linux.tgz
+
+    1
+
+添加环境变量：
+在~/.bashrc最后输入：
+
+export ANDROID_HOME="/YOUR_PATH/android-sdk-linux"
+export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
+export JAVA_CMD="/usr/lib/jvm/java-7-openjdk-amd64/bin/java"
+
+重启一个终端，输入：
+
+android
+
+
+打开Android SDK Manager
+
+选择Android SDK Platform-tools、Samples for SDK等等下载安装，注意在extra中选择Android Support Repository（gradle需要）
+安装Android studio
+
+下载：
+国内镜像：http://gmirror.org/#android-studio
+
+进入解压路径，输入：
+
+cd bin
+./studio.sh
+
+添加环境变量：
+在~/.bashrc最后输入：
+
+export PATH="$PATH:/YOUR_PATH/android-studio/bin"
+
+配置文件：
+创建两个文件：
+
+touch ~/.AndroidStudio2.2/studio.vmoptions
+touch ~/.AndroidStudio2.2/studio64.vmoptions
+
+在/android-studio/bin目录下有同名的两个文件，将-Xms和-Xmx开头的两行分别复制到新建的两个文件中即可。
+
+
+四 。
+5.2、设置android studio的快捷启动图标
+
+
+如果不设置快捷启动图标，每次打开都要进入..../android-studio/bin/下，特别麻烦
+
+ubuntu 的所有的快捷启动图标都在/usr/share/applications/内
+
+在终端输入以下命令：
+
+[java] view plain copy
+
+    sudo gedit /usr/share/applications/AndroidStudio.desktop  
+
+
+在打开的文档中添加下面的内容：
+[java] view plain copy
+
+    [Desktop Entry]  
+    Name=Android Studio  
+    Comment=android studio  
+    Exec=/home/lcw/android_develop_tools/android-studio/bin/studio.sh  
+    Icon=/home/lcw/android_develop_tools/android-studio/bin/studio.png  
+    Terminal=false  
+    Type=Application  
+    Categories=Application  
+
+
+保存、关闭后，会在/usr/share/applications中看到Android Studio的快捷方式，复制到桌面双击图标就可使用了
+
+(需要注意的是，每一行必须紧靠左侧且每行最后面不能有空格，否则会失败)
+
+创建完将其复制到桌面即可
+
+对上面的命令中的几条稍作解释：
+
+Exec代表应用程序的位置【视实际情况修改】
+
+Icon代表应用程序图标的位置【视实际情况修改】
+
+Terminal的值为false表示启动时不启动命令行窗口，值为true表示启动命令行窗口【建议为false】
+
+Categories这里的内容决定创建出的起动器在应用程序菜单中的位置，按照上面的写法创建的起动器将出现在应用程序－Internet中，以此类推，如果想在应用程序－办公中创建起动器，上述最后一行应该写成：Categories=Application;Office;
+
